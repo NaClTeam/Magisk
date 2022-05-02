@@ -205,7 +205,7 @@ class MainActivity : BaseMainActivity<ActivityMainMd2Binding>() {
                 setButton(MagiskDialog.ButtonType.POSITIVE) {
                     text = android.R.string.ok
                     onClick {
-                        Shortcuts.addHomeIcon(this@MainActivity)
+//                        Shortcuts.addHomeIcon(this@MainActivity)
                     }
                 }
                 setCancelable(true)

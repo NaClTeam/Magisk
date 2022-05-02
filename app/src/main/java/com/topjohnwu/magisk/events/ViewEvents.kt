@@ -79,7 +79,7 @@ class NavigationEvent(
 
 class AddHomeIconEvent : ViewEvent(), ContextExecutor {
     override fun invoke(context: Context) {
-        Shortcuts.addHomeIcon(context)
+//        Shortcuts.addHomeIcon(context)
     }
 }
 

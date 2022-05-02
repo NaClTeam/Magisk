@@ -19,63 +19,22 @@ import com.topjohnwu.magisk.utils.Utils
 object Shortcuts {
 
     fun setupDynamic(context: Context) {
-        if (Build.VERSION.SDK_INT >= 25) {
-            val manager = context.getSystemService<ShortcutManager>() ?: return
-            manager.dynamicShortcuts = getShortCuts(context)
-        }
+        return
     }
 
     fun addHomeIcon(context: Context) {
-        val intent = context.packageManager.getLaunchIntentForPackage(context.packageName) ?: return
-        val info = ShortcutInfoCompat.Builder(context, Const.Nav.HOME)
-            .setShortLabel(context.getString(R.string.magisk))
-            .setIntent(intent)
-            .setIcon(context.getIconCompat(R.drawable.ic_launcher))
-            .build()
-        ShortcutManagerCompat.requestPinShortcut(context, info, null)
+        return
     }
 
-    private fun Context.getIconCompat(id: Int): IconCompat {
-        return if (Build.VERSION.SDK_INT >= 26)
-            IconCompat.createWithAdaptiveBitmap(getBitmap(id))
-        else
-            IconCompat.createWithBitmap(getBitmap(id))
+    private fun Context.getIconCompat(id: Int): IconCompat? {
+        return null
     }
 
     @RequiresApi(api = 23)
-    private fun Context.getIcon(id: Int) = getIconCompat(id).toIcon(this)
+    private fun Context.getIcon(id: Int) = null
 
     @RequiresApi(api = 25)
     private fun getShortCuts(context: Context): List<ShortcutInfo> {
-        val intent = context.packageManager.getLaunchIntentForPackage(context.packageName)
-            ?: return emptyList()
-
-        val shortCuts = mutableListOf<ShortcutInfo>()
-
-        if (Utils.showSuperUser()) {
-            shortCuts.add(
-                ShortcutInfo.Builder(context, Const.Nav.SUPERUSER)
-                    .setShortLabel(context.getString(R.string.superuser))
-                    .setIntent(
-                        Intent(intent).putExtra(Const.Key.OPEN_SECTION, Const.Nav.SUPERUSER)
-                    )
-                    .setIcon(context.getIcon(R.drawable.sc_superuser))
-                    .setRank(0)
-                    .build()
-            )
-        }
-        if (Info.env.isActive) {
-            shortCuts.add(
-                ShortcutInfo.Builder(context, Const.Nav.MODULES)
-                    .setShortLabel(context.getString(R.string.modules))
-                    .setIntent(
-                        Intent(intent).putExtra(Const.Key.OPEN_SECTION, Const.Nav.MODULES)
-                    )
-                    .setIcon(context.getIcon(R.drawable.sc_extension))
-                    .setRank(1)
-                    .build()
-            )
-        }
-        return shortCuts
+        return emptyList()
     }
 }

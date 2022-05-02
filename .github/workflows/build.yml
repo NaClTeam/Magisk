@@ -17,12 +17,10 @@ on:
 
 jobs:
   build:
-    name: Build on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: Build on ubuntu-latest
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
     env:
       NDK_CCACHE: ${{ github.workspace }}/ccache
       CCACHE_DIR: ${{ github.workspace }}/.ccache
@@ -73,14 +71,6 @@ jobs:
         run: |
           ./ccache -zp
           python build.py -vr all
-
-      - name: Build debug
-        run: |
-          python build.py -v all
-          ./ccache -s
-
-      - name: Stop gradle daemon
-        run: ./gradlew --stop
 
       # Only upload artifacts built on Linux
       - name: Upload build artifact

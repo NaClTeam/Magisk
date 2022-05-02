@@ -101,7 +101,7 @@ abstract class BaseMainActivity<Binding : ViewDataBinding> : NavigationActivity<
         handleRepackage(prevPkg)
         Notifications.setup(this)
         JobService.schedule(this)
-        Shortcuts.setupDynamic(this)
+//        Shortcuts.setupDynamic(this)
 
         // Pre-fetch network services
         ServiceLocator.networkService
